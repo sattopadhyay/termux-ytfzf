@@ -1,5 +1,5 @@
 PROG=ytfzf
-PREFIX=/usr/local
+PREFIX=/data/data/com.termux/files/usr
 BINDIR=${PREFIX}/bin
 DOCDIR=${PREFIX}/share/doc/ytfzf
 MANDIR=${PREFIX}/share/man
@@ -17,6 +17,7 @@ doc:
 	cp docs/man/ytfzf.5 ${DESTDIR}${MANDIR}/man5
 	cp docs/conf.sh ${DESTDIR}${DOCDIR}
 	cp LICENSE ${DESTDIR}${LICENSEDIR}
+	makewhatis 
 
 install:
 	chmod 755 ${PROG}
@@ -43,9 +44,9 @@ uninstall:
 	rm -rf ${DESTDIR}${YTFZF_SYSTEM_ADDON_DIR}
 
 #legacy install locations on linux
-uninstall-old:
-	rm -f /usr/bin/ytfzf
-	rm -f /usr/share/man/man1/ytfzf.1*
-	rm -f /usr/share/man/man5/ytfzf.5*
+#uninstall-old:
+#	rm -f /usr/bin/ytfzf
+#	rm -f /usr/share/man/man1/ytfzf.1*
+#	rm -f /usr/share/man/man5/ytfzf.5*
 
 .PHONY: install uninstall doc addons uninstall-old
