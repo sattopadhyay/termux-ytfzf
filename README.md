@@ -11,7 +11,7 @@
 	<a href="https://matrix.to/#/#ytfzf-chat:matrix.org"><img src="https://img.shields.io/static/v1?color=%230eb687&message=chat&logo=matrix&label=matrix&style=flat-square" alt="Discord"></a>
     <br />
     <br />
-    <i>A POSIX script that helps you find Youtube videos (without API) and opens/downloads them using mpv/youtube-dl</i>
+    <i>A POSIX script that helps you find Youtube videos (without API) and opens/downloads them using mpv/youtube-dl which can be easily installed on the termux application on android. The purpose of this fork is to enable easy installation of ytfzf with all of its documentation on termux.</i>
 	<hr>
 </p>
 
@@ -73,17 +73,15 @@ There are only 2 required dependencies, however the rest require some configurat
     <img src="https://repology.org/badge/vertical-allrepos/ytfzf.svg" alt="Repo status" align="right">
 </a>
 
-**if on `linux` and installed using make on version `2.0` or prior, run `sudo make uninstall-old` first**
-
 1. Install the dependencies listed [above](#Dependencies)
 2. Run the following commands
 ```sh
 git clone https://github.com/pystardust/ytfzf
 cd ytfzf
-sudo make install doc
+make install doc
 ```
 
-* If you wish to not install documentation (highly unrecommended) run `sudo make install` instead.
+* If you wish to not install documentation (highly unrecommended) run `make install` instead.
 
 * You may also install `ytfzf` through your package manager, as listed on the side.
 
