@@ -325,7 +325,7 @@ set_vars () {
 
     #save the ecurrent environment so that any user set variables will be saved
     if [ "$check_exists" -eq 1 ]; then
-	tmp_env=/tmp/ytfzf-env
+	tmp_env=$PREFIX/tmp/ytfzf-env
 	env > "$tmp_env"
     fi
 
