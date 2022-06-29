@@ -76,8 +76,8 @@ There are only 2 required dependencies, however the rest require some configurat
 1. Install the dependencies listed [above](#Dependencies)
 2. Run the following commands
 ```sh
-git clone https://github.com/pystardust/ytfzf
-cd ytfzf
+git clone https://github.com/sattopadhyay/termux-ytfzf
+cd termux-ytfzf
 make install doc
 ```
 
