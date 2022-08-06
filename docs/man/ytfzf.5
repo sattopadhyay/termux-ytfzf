@@ -125,6 +125,12 @@ Whether or not to only play audio.
 .IR default: " 0"
 
 .TP
+.RB $ is_fullscreen
+Whether or not to play in fullscreen mode.
+.br
+.IR default: " 0"
+
+.TP
 .RB $ url_handler
 The function/programs to handle the selected videos
 .br
@@ -277,10 +283,6 @@ Uses chafa with 4 colors
 .IR catimg-256
 Uses catimg with 256 colors
 .TP
-.IR w3m
-Uses a workaround to get w3m to work in fzf, may take up a lot of cpu,
-make sure $w3mimgdisplay_path is set to the path to w3mimgdisplay
-.TP
 .IR mpv
 Uses the mpv player to display the images
 .br
@@ -297,12 +299,6 @@ Only works on the sway wayland compositor
 .TP
 .IR default: " ueberzug"
 .RE
-
-.TP
-.RB $ w3mimgdisplay_path
-Path to w3mimgdisplay
-.br
-.IR default: " /usr/lib/w3m/w3mimgdisplay"
 
 .TP
 .RB $ show_formats
@@ -825,6 +821,15 @@ The char to use for long opts.
 .br
 .IR default: " \-"
 
+.TP
+.RB $ YTFZF_CHECK_VARS_EXISTS
+Whether or not to check if variables in the environment already exist when setting default options.
+.br
+This option can not be set in the config, it must be set in your startup shell with export, or before running ytfzf such as:
+.I YTFZF_CHECK_VARS_EXISTS=0 ytfzf ...
+.br
+.IR default: 1
+
 .RE
 
 .PP
@@ -838,16 +843,13 @@ State values are \fBNOT\fR meant to be modified by the user.
 Whether or not the script is in a submenu.
 
 .TP
-.RB $ __is_scrape_for_submenu
-Whether or not the script is scraping for a submenu.
-
-.TP
 .RB $ __is_fzf_preview
 Whether or not the script is running to display an fzf preview
 
 .TP
 .RB __scrape_count
 The current scrape count starting at 1.
+
 
 .SS FUNCTIONS
 .PP
@@ -1249,6 +1251,14 @@ Misc
 This function sends a notification for the videos that are about to be played.
 .br
 This function takes an unknown amount of urls as arguments.
+
+.TP
+.BR post_scrape()
+This function happens after all scraping is complete
+
+.TP
+.BR post_scrape_<extension-name>()
+Same as post_scrape() but for each extension
 
 .TP
 .BR on_opt_parse ()

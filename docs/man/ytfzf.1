@@ -61,6 +61,11 @@ Play audio only.
 This can also be set in the config file with
 .BR is_audio_only .
 .TP
+.BR \-\-fullscreen
+Tell the url handler to play in fullscreen mode.
+This can also be set in the config file with
+.BR is_fullscreen .
+.TP
 .BR \-f ", " \-\-formats
 Show available formats before proceeding.
 .TP
@@ -221,9 +226,6 @@ chafa, chafa with 16 colors, chafa with 4 colors.
 .TP
 .IR catimg, catimg-256
 catimg, catimg with 256 colors.
-.TP
-.IR w3m
-Uses a workaround to get w3m to work in fzf, may take up a lot of cpu.
 .TP
 .IR imv
 Good with tiling window managers.
@@ -647,6 +649,60 @@ Lists all addons and exits.
 The default behaviour of \fBytfzf\fR can be changed by modifying the config file.
 See \fBytfzf\fR(5) for more information.
 
+.SH ADDONS
+.PP
+There are a few types of addons,
+.br
+.B interfaces (\-\-interface)
+.br
+.B scrapers (\-c)
+.br
+.B sort-names (\-\-sort\-name)
+.br
+.B thumbnail-viewers (\-\-thumb\-viewer)
+.br
+.B url-handlers (\-\-url_handler)
+.br
+.B extensions (\-\-ext)
+
+.PP
+To install an addon, place the addon in
+.I $YTFZF_SYSTEM_ADDON_DIR/<addon-type>/addon-name
+.PP
+To use an addon, use one of the options listed above, or add
+.br
+.B load_interface <interface>
+.br
+.B scrape=<scraper>
+.br
+.B load_sort_name <sort-name>
+.br
+.B load_thumbnail_viewer <viewer>
+.br
+.B load_url_handler <url-handler>
+.br
+.B load_extension <ext>
+.br
+In your configuration file
+
+
+.SH EXIT CODES
+.TP
+.B 0
+Success
+.TP
+.B 1
+General error
+.TP
+.B 2
+Invalid \-\-option, option value, or configuration error.
+.TP
+.B 3
+Missing dependency
+.TP
+.B 5
+Empty search
+
 .SH ENVIRONMENT
 .TP
 .B $YTFZF_CONFIG_DIR
@@ -704,14 +760,14 @@ The directory to store extensions
 the default is
 .I $YTFZF_CONFIG_DIR/extensions
 .TP
-.TP
 .B $YTFZF_SYSTEM_ADDON_DIR
 The directory to store system installed addons.
 The default may vary depending on how you installed ytfzf.
-.B $cache_dir
-The directory to store cache
-the default is
-.I "$XDG_CACHE_HOME/ytfzf (or $HOME/.cache/ytfzf)"
+.TP
+.B $YTFZF_CHECK_VARS_EXISTS
+Whether or not to check if variables are set in the environment before setting default values.
+The default is
+.I 1
 
 .SH FILES
 .TP
@@ -723,9 +779,6 @@ The submenu configuration file
 .TP
 .I ~/.config/ytfzf/subscriptions
 The subscriptions file.
-.TP
-.I ~/.cache/ytfzf/watch_hist
-Watch history (if $enable_hist is 1)
 
 .SH CACHE
 .PP
@@ -745,8 +798,10 @@ $cache_dir
 |  |  | \-\- curl_config
 |  |  | \-\- <scrape>.html
 |  |  | \-\- <scrape>.json
+|  |  | \-\- <scrape>.json.final
 |  |  | \-\- menu_keypress
-|  |  | \-\- submenu.json?
+|  |  | \-\- all-ids.list
+|  |  | \-\- downloaded-ids.list
 |  | \-\- ids
 |  | \-\- videos_json
 .EE
@@ -789,8 +844,17 @@ For scrapers that need to scrape websites, this is the output of curl.
 .IR <scrape>.json
 The json scraped from a website.
 .TP
+.IR <scrape>.json.final
+The final json scraped from a website. (Is used when multiple threads are used for scraping)
+.TP
 .IR menu_keypress
 The key pressed in fzf.
+.TP
+.IR all-ids.json
+File that contains all scraped ids. Mainly to compare against downloaded-ids.json
+.TP
+.IR downloaded-ids.json
+File that contains which thumbnails have been downloaded
 .TP
 .IR ids
 The file that stores the id of each selected video.

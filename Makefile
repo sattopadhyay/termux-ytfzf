@@ -21,19 +21,18 @@ doc:
 
 install:
 	chmod 755 ${PROG}
-	cp ${PROG} ${PROG}.bak
 	mkdir -p ${DESTDIR}${BINDIR}
-	cp ${PROG}.bak ${DESTDIR}${BINDIR}/${PROG}
-	rm ${PROG}.bak
+	cp ${PROG} ${DESTDIR}${BINDIR}/${PROG}
 
 addons:
 	chmod 755 addons/*/*
 	mkdir -p ${DESTDIR}${YTFZF_SYSTEM_ADDON_DIR}
-	cp -r addons/interfaces ${DESTDIR}${YTFZF_SYSTEM_ADDON_DIR}/interfaces
-	cp -r addons/scrapers ${DESTDIR}${YTFZF_SYSTEM_ADDON_DIR}/scrapers
-	cp -r addons/sort-names ${DESTDIR}${YTFZF_SYSTEM_ADDON_DIR}/sort-names
-	cp -r addons/thumbnail-viewers ${DESTDIR}${YTFZF_SYSTEM_ADDON_DIR}/thumbnail-viewers
-	cp -r addons/url-handlers ${DESTDIR}${YTFZF_SYSTEM_ADDON_DIR}/url-handlers
+	cp -r addons/interfaces ${DESTDIR}${YTFZF_SYSTEM_ADDON_DIR}
+	cp -r addons/scrapers ${DESTDIR}${YTFZF_SYSTEM_ADDON_DIR}
+	cp -r addons/sort-names ${DESTDIR}${YTFZF_SYSTEM_ADDON_DIR}
+	cp -r addons/thumbnail-viewers ${DESTDIR}${YTFZF_SYSTEM_ADDON_DIR}
+	cp -r addons/url-handlers ${DESTDIR}${YTFZF_SYSTEM_ADDON_DIR}
+	cp -r addons/extensions ${DESTDIR}${YTFZF_SYSTEM_ADDON_DIR}
 
 uninstall:
 	rm -f ${DESTDIR}${MANDIR}/man1/ytfzf.1
