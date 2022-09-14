@@ -111,7 +111,7 @@ Detach the video player from the terminal.
 This can also be set in the config file with
 .BR is_detach .
 .TP
-.BR \-\-url\-handler=handler
+.BR \-u ", " \-\-url\-handler=handler
 The function/program to use as a url handler.
 This can also be set in the config file with
 .BR url_handler .
@@ -194,7 +194,7 @@ This can also be set in the config file with
 .BR skip_thumb_download .
 .TP
 .BR \-\-notify-playing
-Show notifications when a video is about to be played.
+Show notifications when a video is about to be played, and other notifications relating to playing videos.
 This can also be set in the config file with
 .BR notify_playing .
 .TP
@@ -251,7 +251,7 @@ The default is \fIdmenu\fR.
 This can also be set in the config file with
 .BR interface="ext" .
 .TP
-.BR \-\-interface=interface
+.BR \-i ", " \-\-interface=interface
 Use a custom interface script, which would be in $YTFZF_CUSTOM_INTERFACES_DIR.
 This can also be set in the config file with
 .BR interface .
@@ -407,6 +407,9 @@ See "scrape lists" ytfzf(5) for more information.
 .IR url | U
 Opens the url in the video player and exits
 .TP
+.IR u
+Treats the url as an item, and will open fzf, or the external menu.
+.TP
 .IR comments
 Scrapes the comments of a video link from youtube
 .RE
@@ -455,14 +458,14 @@ This can also be set in the config file with
 Amount of threads that can be used to scrape youtube search, playlists, and channels.
 (this does not apply to the subscription scraper).
 .br
-This can also be set in the config file with 
+This can also be set in the config file with
 .BR max_thread_count .
 .TP
 .BI "\-\-single\-threaded"
 Set the max_thread_count to 1, this has the same effect as making everything single threaded.
 (this does not apply to the subscription scraper).
 .br
-This can also bet set in the config file with 
+This can also bet set in the config file with
 .BR max_thread_count=1 .
 .TP
 .BI "\-\-odysee\-video\-count=amount"
@@ -539,7 +542,7 @@ The type of results to get.
 .IR all
 .RE
 .TP
-.BI \-\-thumbnail\-quality= quality
+.BI \-T ", " \-\-thumbnail\-quality= quality
 Select the quality of the thumbnails.
 Available options:
 .RS
@@ -596,11 +599,14 @@ Supported by the scrapes youtube/Y and youtube-trending/T
 .RE
 
 .PP
-Miscelanious
+Miscellaneous
 .RS
 .TP
 .BI "\-\-ii=instance", "\-\-invidious\-instance=instance"
 Use a different invidious instance.
+.TP
+.BI "\-\-rii", "\-\-refresh\-inv-instance"
+If this flag is provided, refresh instance cache with healthy instances using Invidious API
 .TP
 .BI "\-\-channel\-link=link"
 Converts channel links from 'https://youtube.com/c/name' to 'https://youtube.com/channel/id'
@@ -608,7 +614,27 @@ Converts channel links from 'https://youtube.com/c/name' to 'https://youtube.com
 .BR \-q
 Use search history instead of a search.
 This can also be set in the config file with
-.BR use_search_hist .
+.BR search_source=hist .
+.TP
+.BR \-\-search\-source
+The source to use for the search query. Valid values include:
+.RS
+.TP
+.RB args
+Use commandline arguments as the search (default)
+.TP
+.RB prompt
+Ask for a search via a prompt
+.TP
+.RB hist
+Use search history.
+.TP
+.RB next
+Used internally to use the next search in the list when \fBmulti_search\fR is enabled.
+.TP
+.RB fn-args
+Used internally to use the function arguments passed to the function as the source.
+.RE
 .TP
 .BR \-x ", " \-\-history\-clear=<search|watch>
 Clear search and watch history (if \-x or \-\-history\-clear is used)
@@ -634,7 +660,7 @@ Specify the path to youtube\-dl or a fork of youtube\-dl for downloading.
 This can also be set in the config file with
 .BR ytdl_path .
 .TP
-.BI \-\-ext=extension
+.BI \-e ", " \-\-ext=extension
 Load an extension.
 .br
 You may also add
